@@ -11,10 +11,11 @@ const shapeConfigurations: FluidShapesProps[] = [
     left: '0',
     zIndex: -3,
     shapeType: 'wave',
-    color1: 'rgba(147, 112, 219, 0.8)',  // Light purple
-    color2: 'rgba(75, 0, 130, 0.8)',     // Indigo
-    speed: 0.002,
-    opacity: 0.5,
+    color1: 'rgba(147, 112, 219, 0.7)',  // Light purple (more opaque)
+    color2: 'rgba(75, 0, 130, 0.7)',     // Indigo (more opaque)
+    color3: 'rgba(218, 112, 214, 0.7)',  // Orchid (more opaque)
+    speed: 0.003, // Slightly increased speed
+    opacity: 0.8, // Increased opacity
   },
   {
     width: '50vw',
@@ -23,10 +24,11 @@ const shapeConfigurations: FluidShapesProps[] = [
     left: '25vw',
     zIndex: -2,
     shapeType: 'orb',
-    color1: 'rgba(255, 182, 193, 0.8)',  // Light pink
-    color2: 'rgba(255, 20, 147, 0.8)',   // Deep pink
-    speed: 0.001,
-    opacity: 0.6,
+    color1: 'rgba(255, 105, 180, 0.7)',  // Hot pink (more opaque)
+    color2: 'rgba(255, 20, 147, 0.7)',   // Deep pink (more opaque)
+    color3: 'rgba(255, 0, 255, 0.7)',    // Magenta (more opaque)
+    speed: 0.002, // Slightly increased speed
+    opacity: 0.85, // Increased opacity
   },
   {
     width: '100vw',
@@ -35,10 +37,11 @@ const shapeConfigurations: FluidShapesProps[] = [
     left: '0',
     zIndex: -1,
     shapeType: 'wave',
-    color1: 'rgba(135, 206, 235, 0.8)',  // Sky blue
-    color2: 'rgba(0, 0, 255, 0.8)',      // Blue
-    speed: 0.003,
-    opacity: 0.4,
+    color1: 'rgba(0, 191, 255, 0.7)',    // Deep sky blue (more opaque)
+    color2: 'rgba(0, 0, 255, 0.7)',      // Blue (more opaque)
+    color3: 'rgba(65, 105, 225, 0.7)',   // Royal blue (more opaque)
+    speed: 0.004, // Slightly increased speed
+    opacity: 0.75, // Increased opacity
   },
 ];
 

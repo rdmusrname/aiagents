@@ -163,6 +163,8 @@ const Card = styled.form`
   max-width: 70rem;
   overflow: hidden;
   color: rgb(var(--text));
+  border: 1px solid rgba(var(--text), 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 
   ${media('<=tablet')} {
     padding: 7.5rem 2.5rem;

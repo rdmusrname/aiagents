@@ -1,8 +1,27 @@
-import { ColorModeStyles, useColorModeValue, useColorSwitcher } from 'nextjs-color-mode';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function ColorSwitcher() {
-  const { toggleTheme, colorMode } = useColorSwitcher();
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setIsDarkMode(savedTheme === 'dark');
+    } else {
+      const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      setIsDarkMode(darkModeMediaQuery.matches);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   const sunIcon = (
     <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
@@ -29,19 +48,26 @@ export default function ColorSwitcher() {
     </svg>
   );
 
-  return <CustomButton onClick={toggleTheme}>{colorMode === 'light' ? moonIcon : sunIcon}</CustomButton>;
+  return <CustomButton onClick={toggleTheme}>{isDarkMode ? sunIcon : moonIcon}</CustomButton>;
 }
 
 const CustomButton = styled.button`
   display: flex;
   cursor: pointer;
   align-items: center;
+  justify-content: center;
   border: 0;
   width: 4rem;
   height: 4rem;
   background: transparent;
+  transition: background-color 0.3s ease;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: rgba(var(--text), 0.1);
+  }
 
   svg {
-    color: var(--logoColor);
+    color: rgb(var(--text));
   }
 `;

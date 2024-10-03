@@ -47,9 +47,9 @@ export default function FeaturesGallery() {
   const [currentFeature, setCurrentFeature] = useState(0);
 
   return (
-    <FeaturesGalleryWrapper className="content-area">
+    <FeaturesGalleryWrapper>
       <Content>
-        <OverTitle>Unleash the Power of AI</OverTitle>
+        <CustomOverTitle>Unleash the Power of AI</CustomOverTitle>
         <SectionTitle>Cutting-Edge Features</SectionTitle>
       </Content>
       <GalleryWrapper>
@@ -77,34 +77,46 @@ const FeaturesGalleryWrapper = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5rem;
-  padding: 6rem;
-  border-radius: 2.5rem;
-  box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.1);
+  margin: 5rem auto;
+  padding: 4rem 3rem;
+  border-radius: 2rem;
+  background: rgba(var(--cardBackground), 0.8);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
+  max-width: 1200px;
 
   &:hover {
-    transform: translateY(-0.5rem);
-    box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-0.3rem);
+    box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15);
+  }
+
+  ${media('<=tablet')} {
+    padding: 3rem 2rem;
   }
 `;
 
 const Content = styled.div`
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+`;
+
+const CustomOverTitle = styled(OverTitle)`
+  margin-bottom: 2rem;
+  color: rgb(var(--primary));
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 5.2rem;
+  font-size: 3.6rem;
   font-weight: bold;
   line-height: 1.1;
   letter-spacing: -0.03em;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   color: rgba(var(--text), 0.85);
 
   ${media('<=tablet')} {
-    font-size: 4.6rem;
+    font-size: 3rem;
     margin-bottom: 2rem;
   }
 `;
@@ -117,7 +129,7 @@ const GalleryWrapper = styled.div`
 const FeatureGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4rem;
+  gap: 3rem;
   
   ${media('<=desktop')} {
     grid-template-columns: repeat(2, 1fr);
@@ -133,33 +145,33 @@ const FeatureCard = styled.div<{ selected: boolean }>`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 3rem;
+  padding: 2rem;
   background: rgba(var(--cardBackground), 0.8);
   backdrop-filter: blur(10px);
-  border-radius: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5rem;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 
   ${(p) =>
     p.selected &&
     `
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: scale(1.03);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
   `}
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-0.3rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
   }
 `;
 
 const FeatureImageWrapper = styled.div`
   display: inline-block;
   position: relative;
-  width: 8rem;
-  height: 8rem;
-  margin-bottom: 2rem;
+  width: 6rem;
+  height: 6rem;
+  margin-bottom: 1.5rem;
 `;
 
 const FeatureImage = styled.img`
@@ -169,14 +181,14 @@ const FeatureImage = styled.img`
 `;
 
 const FeatureTitle = styled.h3`
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
   color: rgba(var(--text), 0.85);
 `;
 
 const FeatureDescription = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: rgba(var(--text), 0.7);
   line-height: 1.5;
 `;

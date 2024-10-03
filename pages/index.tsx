@@ -71,34 +71,70 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
           </BasicSection>
           <ScrollableBlogPosts posts={posts} />
         </WhiteBackgroundContainer>
+        <Footer>
+          <p>&copy; {new Date().getFullYear()} AIAgents.biz. All rights reserved.</p>
+        </Footer>
       </HomepageWrapper>
     </>
   );
 }
 
 const HomepageWrapper = styled.div`
-  & > :last-child {
-    margin-bottom: 15rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 `;
 
 const WhiteBackgroundContainer = styled.div`
-  background: rgba(var(--secondBackground), 0.4);
-  backdrop-filter: blur(10px);
-
-  & > :last-child {
-    padding-bottom: 15rem;
-  }
+  background: rgba(var(--secondBackground), 0.3);
+  backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   & > *:not(:first-child) {
-    margin-top: 15rem;
+    margin-top: 8rem;
+  }
+
+  & > *:last-child {
+    margin-bottom: 8rem;
   }
 
   ${media('<=desktop')} {
     & > *:not(:first-child) {
-      margin-top: 10rem;
+      margin-top: 6rem;
+    }
+
+    & > *:last-child {
+      margin-bottom: 6rem;
     }
   }
+
+  ${media('<=tablet')} {
+    & > *:not(:first-child) {
+      margin-top: 4rem;
+    }
+
+    & > *:last-child {
+      margin-bottom: 4rem;
+    }
+  }
+`;
+
+const Footer = styled.footer`
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: rgb(var(--text));
 `;
 
 export async function getStaticProps() {

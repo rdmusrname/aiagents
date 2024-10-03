@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { A11y } from 'swiper';
+import { A11y, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ArticleCard from 'components/ArticleCard';
 import Container from 'components/Container';
@@ -19,7 +19,7 @@ export default function ScrollableBlogPosts({ posts }: ScrollableBlogPostsProps)
   const { ref, width = 1 } = useResizeObserver<HTMLDivElement>();
 
   const oneItemWidth = 350;
-  const noOfItems = width / oneItemWidth;
+  const noOfItems = Math.max(1, Math.floor(width / oneItemWidth));
 
   useEffect(() => {
     setHasMounted(true);
@@ -29,14 +29,20 @@ export default function ScrollableBlogPosts({ posts }: ScrollableBlogPostsProps)
     <Section>
       <Container>
         <Content>
-          {/* <OverTitle>features</OverTitle>
-          <SectionTitle>What are you signing in for?</SectionTitle> */}
+          <OverTitle>Latest Articles</OverTitle>
+          <SectionTitle>Explore Our Blog</SectionTitle>
         </Content>
       </Container>
 
       <SwiperContainer ref={ref}>
         {hasMounted && (
-          <Swiper modules={[A11y]} slidesPerView={noOfItems} spaceBetween={10} loop>
+          <Swiper
+            modules={[A11y, Pagination]}
+            slidesPerView={noOfItems}
+            spaceBetween={20}
+            pagination={{ clickable: true }}
+            loop={false}
+          >
             {posts.map((singlePost, idx) => (
               <SwiperSlide key={singlePost.meta.title}>
                 <ArticleCard
@@ -56,10 +62,10 @@ export default function ScrollableBlogPosts({ posts }: ScrollableBlogPostsProps)
 
 const Content = styled.div`
   position: relative;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 3rem;
 
   & > *:last-child {
     margin-top: 1rem;
@@ -69,21 +75,35 @@ const Content = styled.div`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  & > *:not(:first-child) {
-    margin-top: 1rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 0;
+  background: rgba(var(--cardBackground), 0.8);
+  backdrop-filter: blur(15px);
+  border-radius: 2rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+
+  ${media('<=tablet')} {
+    padding: 3rem 0;
   }
 `;
 
 const SwiperContainer = styled(Container)`
-  max-width: 250em;
-  height: 46rem;
+  max-width: 100%;
+  padding: 0 2rem;
 
-  & > *:first-child {
-    margin-top: 4rem;
+  .swiper {
+    width: 100%;
+    padding-bottom: 4rem; // Space for pagination
   }
 
-  ${media('<=largeDesktop')} {
-    max-width: 100%;
-    padding: 0;
+  .swiper-pagination {
+    bottom: 0;
+  }
+
+  ${media('<=desktop')} {
+    padding: 0 1rem;
   }
 `;

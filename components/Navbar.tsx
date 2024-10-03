@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNewsletterModalContext } from 'contexts/newsletter-modal.context';
 import { ScrollPositionEffectProps, useScrollPosition } from 'hooks/useScrollPosition';
@@ -29,6 +29,15 @@ export default function Navbar({ items }: NavbarProps) {
   const stepSize = useRef(50);
 
   useScrollPosition(scrollPositionCallback, [router.asPath], undefined, undefined, 50);
+
+  useEffect(() => {
+    // Set dark mode as default if no theme is saved
+    const savedTheme = localStorage.getItem('theme');
+    if (!savedTheme) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  }, []);
 
   function scrollPositionCallback({ currPos }: ScrollPositionEffectProps) {
     const routerPath = router.asPath;

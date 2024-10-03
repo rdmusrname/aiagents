@@ -82,6 +82,7 @@ export default function FormSection() {
 
 const Wrapper = styled.div`
   flex: 2;
+
 `;
 
 const Form = styled.form`
@@ -128,4 +129,6 @@ const ErrorMessage = styled.p`
 const Textarea = styled(Input)`
   width: 100%;
   min-height: 20rem;
+    border: 1px solid blue;
+  border-radius: 10px;
 `;

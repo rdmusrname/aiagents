@@ -10,6 +10,7 @@ export interface FluidShapesProps {
   shapeType: 'wave' | 'orb';
   color1: string;
   color2: string;
+  color3: string;
   speed?: number;
   opacity?: number;
 }
@@ -21,7 +22,8 @@ const defaultProps: Partial<FluidShapesProps> = {
   left: '0',
   zIndex: -1,
   speed: 0.002,
-  opacity: 0.7,
+  opacity: 0.9,
+  color3: '#8A2BE2', // Default third color (violet)
 };
 
 const FluidShapes: React.FC<FluidShapesProps> = (props) => {
@@ -34,6 +36,7 @@ const FluidShapes: React.FC<FluidShapesProps> = (props) => {
     shapeType,
     color1,
     color2,
+    color3,
     speed,
     opacity,
   } = { ...defaultProps, ...props };
@@ -53,28 +56,37 @@ const FluidShapes: React.FC<FluidShapesProps> = (props) => {
     let animationFrameId: number;
     let time = 0;
 
+    // Simplified noise function
+    const noise = (x: number, y: number, z: number) => {
+      return Math.sin(x * 10 + z) * Math.cos(y * 10 + z) * 0.5 + 0.5;
+    };
+
+    const createComplexGradient = (x: number, y: number, radius: number) => {
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      gradient.addColorStop(0, color1);
+      gradient.addColorStop(0.3, color2);
+      gradient.addColorStop(0.6, color3);
+      gradient.addColorStop(1, color1);
+      return gradient;
+    };
+
     const drawWave = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-      gradient.addColorStop(0, color1);
-      gradient.addColorStop(1, color2);
-
+      const gradient = createComplexGradient(canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height) / 2);
       ctx.fillStyle = gradient;
-      ctx.beginPath();
 
-      for (let x = 0; x < canvas.width; x++) {
-        const y = Math.sin(x * 0.01 + time) * 50 + canvas.height / 2;
+      ctx.beginPath();
+      for (let x = 0; x <= canvas.width; x += 20) {
+        const y = canvas.height / 2 + Math.sin(x * 0.01 + time) * 50 + noise(x * 0.005, time, 0) * 50;
         ctx.lineTo(x, y);
       }
-
       ctx.lineTo(canvas.width, canvas.height);
       ctx.lineTo(0, canvas.height);
       ctx.closePath();
       ctx.fill();
 
       time += speed!;
-      animationFrameId = requestAnimationFrame(drawWave);
     };
 
     const drawOrb = () => {
@@ -82,31 +94,42 @@ const FluidShapes: React.FC<FluidShapesProps> = (props) => {
 
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
-      const radius = Math.min(canvas.width, canvas.height) * 0.2;
+      const radius = Math.min(canvas.width, canvas.height) * 0.3;
 
-      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-      gradient.addColorStop(0, color1);
-      gradient.addColorStop(1, color2);
-
+      const gradient = createComplexGradient(centerX, centerY, radius);
       ctx.fillStyle = gradient;
+
       ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
+        const x = centerX + Math.cos(angle) * (radius + noise(angle, time, 0) * 20);
+        const y = centerY + Math.sin(angle) * (radius + noise(angle, time, 0) * 20);
+        if (angle === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.closePath();
       ctx.fill();
 
       time += speed!;
-      animationFrameId = requestAnimationFrame(drawOrb);
     };
 
-    if (shapeType === 'wave') {
-      drawWave();
-    } else {
-      drawOrb();
-    }
+    const animate = () => {
+      if (shapeType === 'wave') {
+        drawWave();
+      } else {
+        drawOrb();
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
 
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [shapeType, color1, color2, speed, opacity]);
+  }, [shapeType, color1, color2, color3, speed, opacity]);
 
   return <StyledCanvas ref={canvasRef} width={width} height={height} top={top} left={left} zIndex={zIndex} opacity={opacity} />;
 };
