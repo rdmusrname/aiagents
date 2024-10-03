@@ -17,7 +17,6 @@ const ColorSwitcher = dynamic(() => import('../components/ColorSwitcher'), { ssr
 
 type NavbarProps = { items: NavItems };
 type ScrollingDirections = 'up' | 'down' | 'none';
-type NavbarContainerProps = { hidden: boolean; transparent: boolean };
 
 export default function Navbar({ items }: NavbarProps) {
   const router = useRouter();
@@ -77,7 +76,7 @@ export default function Navbar({ items }: NavbarProps) {
     <NavbarContainer hidden={isNavbarHidden} transparent={isTransparent}>
       <Content>
         <NextLink href="/blog" passHref>
-          <LogoWrapper>
+          <LogoWrapper aria-label="Go to homepage">
             <Logo />
           </LogoWrapper>
         </NextLink>
@@ -111,7 +110,7 @@ function NavItem({ href, title, outlined }: SingleNavItem) {
   return (
     <NavItemWrapper outlined={outlined}>
       <NextLink href={href} passHref>
-        <a>{title}</a>
+       {title}
       </NextLink>
     </NavItemWrapper>
   );
@@ -141,7 +140,6 @@ const LogoWrapper = styled.a`
   display: flex;
   margin-right: auto;
   text-decoration: none;
-
   color: rgb(var(--logoColor));
 `;
 
@@ -171,7 +169,7 @@ const NavItemWrapper = styled.li<Partial<SingleNavItem>>`
   }
 `;
 
-const NavbarContainer = styled.div<NavbarContainerProps>`
+const NavbarContainer = styled.div<{ hidden: boolean; transparent: boolean }>`
   display: flex;
   position: sticky;
   top: 0;

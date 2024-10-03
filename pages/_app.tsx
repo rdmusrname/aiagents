@@ -1,21 +1,21 @@
-import 'swiper/css';
-import 'swiper/css/bundle';
-import 'swiper/css/navigation';
-import 'swiper/css/autoplay';
-
 import { AppProps } from 'next/dist/shared/lib/router/router';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import React, { PropsWithChildren, useEffect } from 'react';
 
+import 'swiper/css';
+import 'swiper/css/bundle';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+
 import GlobalStyles from 'components/GlobalStyles';
 import Navbar from 'components/Navbar';
 import NavigationDrawer from 'components/NavigationDrawer';
 import NewsletterModal from 'components/NewsletterModal';
+import ShapesManager from 'components/ShapesManager';
 import WaveCta from 'components/WaveCta';
 import { NewsletterModalContextProvider, useNewsletterModalContext } from 'contexts/newsletter-modal.context';
 import { NavItems } from 'types';
-import ShapesManager from 'components/ShapesManager';
 import styled from 'styled-components';
 
 const navItems: NavItems = [

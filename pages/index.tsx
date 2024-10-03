@@ -26,7 +26,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
           <Hero />
           <BasicSection imageUrl="/demo-illustration-1.svg" title="Empowering Industries with Intelligent Automation" overTitle="Next-Gen AI Solutions">
             <p>
-              At AIAgents.biz, we're redefining what's possible with AI. Our autonomous agents are more than just tools; they're intelligent partners that adapt, learn, and evolve to meet your industry's unique challenges. From healthcare to finance, manufacturing to retail, our AI solutions are driving unprecedented innovation and efficiency.
+              At AIAgents.biz, we&apos;re redefining what&apos;s possible with AI. Our autonomous agents are more than just tools; they&apos;re intelligent partners that adapt, learn, and evolve to meet your industry&apos;s unique challenges. From healthcare to finance, manufacturing to retail, our AI solutions are driving unprecedented innovation and efficiency.
             </p>
             <ul>
               <li>Adaptive learning algorithms for continuous performance optimization</li>
@@ -38,7 +38,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
           </BasicSection>
           <BasicSection imageUrl="/demo-illustration-2.svg" title="Unparalleled User Experience at the Core of AI" overTitle="Human-Centric Innovation" reversed>
             <p>
-              We believe that AI's true potential lies in enhancing human capabilities, not replacing them. That's why user experience is the cornerstone of our development process. Our autonomous AI agents feature:
+              We believe that AI&apos;s true potential lies in enhancing human capabilities, not replacing them. That&apos;s why user experience is the cornerstone of our development process. Our autonomous AI agents feature:
             </p>
             <ul>
               <li>Intuitive interfaces that empower users of all technical backgrounds</li>
@@ -47,7 +47,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               <li>Proactive assistance that anticipates and addresses user requirements</li>
             </ul>
             <p>
-              By prioritizing <strong>user-centric design</strong> and <strong>transparent AI</strong>, we're creating solutions that are not only powerful but also trustworthy and accessible. <Link href="/contact">Discover how our AI agents can transform your user experience and drive business growth.</Link>
+              By prioritizing <strong>user-centric design</strong> and <strong>transparent AI</strong>, we&apos;re creating solutions that are not only powerful but also trustworthy and accessible. <Link href="/contact">Discover how our AI agents can transform your user experience and drive business growth.</Link>
             </p>
           </BasicSection>
           <Features />
@@ -66,7 +66,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               Our unwavering commitment to innovation ensures that your business stays ahead of the curve, equipped with AI solutions that are always at the forefront of technological advancement.
             </p>
             <p>
-              Don't let your competition outpace you. <Link href="/contact">Book a call now</Link> to explore how our cutting-edge AI agents can propel your business into the future.
+              Don&apos;t let your competition outpace you. <Link href="/contact">Book a call now</Link> to explore how our cutting-edge AI agents can propel your business into the future.
             </p>
           </BasicSection>
           <ScrollableBlogPosts posts={posts} />

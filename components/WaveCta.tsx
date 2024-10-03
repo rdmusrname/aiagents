@@ -1,4 +1,3 @@
-import NextLink from 'next/link';
 import styled from 'styled-components';
 import Button from 'components/Button';
 import ButtonGroup from 'components/ButtonGroup';
@@ -26,11 +25,6 @@ export default function WaveCta() {
             <Button onClick={() => setIsModalOpened(true)}>
               Subscribe to the newsletter <span>&rarr;</span>
             </Button>
-            {/* <NextLink href="/features" passHref>
-              <OutlinedButton transparent>
-                Features <span>&rarr;</span>
-              </OutlinedButton>
-            </NextLink> */}
           </CustomButtonGroup>
         </Container>
       </CtaWrapper>
@@ -51,11 +45,6 @@ const CtaWrapper = styled.div`
 const Title = styled(SectionTitle)`
   color: rgb(var(--textSecondary));
   margin-bottom: 4rem;
-`;
-
-const OutlinedButton = styled(Button)`
-  border: 1px solid rgb(var(--textSecondary));
-  color: rgb(var(--textSecondary));
 `;
 
 const CustomButtonGroup = styled(ButtonGroup)`

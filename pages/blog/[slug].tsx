@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { staticRequest } from 'tinacms';
+import { Posts, PostsDocument, Query } from '.tina/__generated__/types';
 import Container from 'components/Container';
 import MDXRichText from 'components/MDXRichText';
 import { NonNullableChildrenDeep } from 'types';
@@ -14,7 +15,6 @@ import MetadataHead from 'views/SingleArticlePage/MetadataHead';
 import OpenGraphHead from 'views/SingleArticlePage/OpenGraphHead';
 import ShareWidget from 'views/SingleArticlePage/ShareWidget';
 import StructuredDataHead from 'views/SingleArticlePage/StructuredDataHead';
-import { Posts, PostsDocument, Query } from '.tina/__generated__/types';
 
 export default function SingleArticlePage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -61,11 +61,6 @@ export default function SingleArticlePage(props: InferGetStaticPropsType<typeof 
   const absoluteImageUrl = imageUrl.replace(/\/+/, '/');
   return (
     <>
-      <Head>
-        <noscript>
-          <link rel="stylesheet" href="/prism-theme.css" />
-        </noscript>
-      </Head>
       <OpenGraphHead slug={slug} {...meta} />
       <StructuredDataHead slug={slug} {...meta} />
       <MetadataHead {...meta} />
