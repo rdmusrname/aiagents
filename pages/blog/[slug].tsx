@@ -3,7 +3,7 @@ import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { staticRequest } from 'tinacms';
-import { Posts, PostsDocument, Query } from '.tina/__generated__/types';
+import { TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import Container from 'components/Container';
 import MDXRichText from 'components/MDXRichText';
 import { NonNullableChildrenDeep } from 'types';
@@ -16,7 +16,27 @@ import OpenGraphHead from 'views/SingleArticlePage/OpenGraphHead';
 import ShareWidget from 'views/SingleArticlePage/ShareWidget';
 import StructuredDataHead from 'views/SingleArticlePage/StructuredDataHead';
 
-export default function SingleArticlePage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+interface PostData {
+  title: string;
+  description: string;
+  date: string;
+  tags: string[];
+  imageUrl: string;
+  body: TinaMarkdownContent | TinaMarkdownContent[];
+}
+
+interface PostsDocument {
+  data: PostData;
+}
+
+interface StaticProps {
+  slug: string;
+  data: {
+    getPostsDocument: PostsDocument;
+  };
+}
+
+export default function SingleArticlePage({ slug, data }: StaticProps) {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [readTime, setReadTime] = useState('');
 
@@ -49,16 +69,16 @@ export default function SingleArticlePage(props: InferGetStaticPropsType<typeof 
     }
   }, []);
 
-  const { slug, data } = props;
-  const content = data.getPostsDocument.data.body;
-
-  if (!data) {
+  if (!data || !data.getPostsDocument) {
     return null;
   }
-  const { title, description, date, tags, imageUrl } = data.getPostsDocument.data as NonNullableChildrenDeep<Posts>;
-  const meta = { title, description, date: date, tags, imageUrl, author: '' };
+
+  const { title, description, date, tags, imageUrl, body } = data.getPostsDocument.data;
+  const tagsString = tags.join(', ');
+  const meta = { title, description, date, tags: tagsString, imageUrl, author: '' };
   const formattedDate = formatDate(new Date(date));
   const absoluteImageUrl = imageUrl.replace(/\/+/, '/');
+
   return (
     <>
       <OpenGraphHead slug={slug} {...meta} />
@@ -67,7 +87,7 @@ export default function SingleArticlePage(props: InferGetStaticPropsType<typeof 
       <CustomContainer id="content" ref={contentRef}>
         <ShareWidget title={title} slug={slug} />
         <Header title={title} formattedDate={formattedDate} imageUrl={absoluteImageUrl} readTime={readTime} />
-        <MDXRichText content={content} />
+        <MDXRichText content={body} />
       </CustomContainer>
     </>
   );
@@ -98,9 +118,8 @@ export async function getStaticPaths() {
     };
   }
 
-  type NullAwarePostsList = { getPostsList: NonNullableChildrenDeep<Query['getPostsList']> };
   return {
-    paths: (postsListData as NullAwarePostsList).getPostsList.edges.map((edge) => ({
+    paths: (postsListData as any).getPostsList.edges.map((edge: any) => ({
       params: { slug: normalizePostName(edge.node.sys.basename) },
     })),
     fallback: false,
@@ -129,13 +148,13 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ slug: s
     }
   `;
 
-  const data = (await staticRequest({
+  const data = await staticRequest({
     query: query,
     variables: variables,
-  })) as { getPostsDocument: PostsDocument };
+  });
 
   return {
-    props: { slug, variables, query, data },
+    props: { slug, data } as StaticProps,
   };
 }
 
