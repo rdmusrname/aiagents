@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import BasicSection from 'components/BasicSection';
 import Link from 'components/Link';
 import { EnvVars } from 'env';
+import { media } from 'utils/media';
 import { getAllPosts } from 'utils/postsFetcher';
-import Hero from 'views/HomePage/Hero';
-import ScrollableBlogPosts from 'views/HomePage/ScrollableBlogPosts';
 import Features from 'views/HomePage/Features';
 import FeaturesGallery from 'views/HomePage/FeaturesGallery';
-import { media } from 'utils/media';
+import Hero from 'views/HomePage/Hero';
+import ScrollableBlogPosts from 'views/HomePage/ScrollableBlogPosts';
 
 export default function Homepage({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (

@@ -1,12 +1,10 @@
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import Head from 'next/head';
+import { GetStaticPropsContext } from 'next';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { staticRequest } from 'tinacms';
 import { TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import Container from 'components/Container';
 import MDXRichText from 'components/MDXRichText';
-import { NonNullableChildrenDeep } from 'types';
 import { formatDate } from 'utils/formatDate';
 import { media } from 'utils/media';
 import { getReadTime } from 'utils/readTime';

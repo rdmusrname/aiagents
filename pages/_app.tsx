@@ -1,7 +1,9 @@
 import { AppProps } from 'next/dist/shared/lib/router/router';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import Link from 'next/link';
 import React, { PropsWithChildren, useEffect } from 'react';
+import styled from 'styled-components';
 
 import 'swiper/css';
 import 'swiper/css/bundle';
@@ -16,7 +18,6 @@ import ShapesManager from 'components/ShapesManager';
 import WaveCta from 'components/WaveCta';
 import { NewsletterModalContextProvider, useNewsletterModalContext } from 'contexts/newsletter-modal.context';
 import { NavItems } from 'types';
-import styled from 'styled-components';
 
 const navItems: NavItems = [
   { title: 'Blog', href: '/blog' },
@@ -154,7 +155,13 @@ function SimpleFooter() {
     <StyledSimpleFooter>
       <p>&copy; {new Date().getFullYear()} AIAgents. All rights reserved.</p>
       <p>
-        <a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a>
+        <Link href="/privacy-policy">
+          <a>Privacy Policy</a>
+        </Link>{' '}
+        |{' '}
+        <Link href="/terms-of-service">
+          <a>Terms of Service</a>
+        </Link>
       </p>
     </StyledSimpleFooter>
   );

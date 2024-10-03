@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { EnvVars } from 'env';
 import Container from 'components/Container';
+import { EnvVars } from 'env';
 import { media } from 'utils/media';
 
 export default function Footer() {
