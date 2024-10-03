@@ -9,66 +9,67 @@ import { media } from 'utils/media';
 const FEATURES = [
   {
     imageUrl: '/grid-icons/asset-1.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'Adaptive Learning Algorithms',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'Our AI agents utilize advanced machine learning techniques to continuously improve their performance, adapting to new data and evolving business needs.',
   },
   {
     imageUrl: '/grid-icons/asset-2.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'Natural Language Processing',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'Enhance human-AI collaboration with our sophisticated NLP capabilities, enabling intuitive interactions and seamless communication.',
   },
   {
     imageUrl: '/grid-icons/asset-3.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'Predictive Analytics',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'Leverage the power of data with our AI agents ability to forecast trends, identify patterns, and provide actionable insights for informed decision-making.',
   },
   {
     imageUrl: '/grid-icons/asset-4.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'Computer Vision',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'Unlock new possibilities with our state-of-the-art computer vision technology, enabling advanced image and video analysis across various applications.',
   },
   {
     imageUrl: '/grid-icons/asset-5.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'Seamless Integration',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'Our AI agents are designed to integrate effortlessly with your existing systems and workflows, ensuring a smooth transition and minimal disruption.',
   },
   {
     imageUrl: '/grid-icons/asset-6.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'User-Centric Design',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'Experience AI that puts users first, with intuitive interfaces and transparent processes that build trust and enhance adoption across your organization.',
   },
   {
     imageUrl: '/grid-icons/asset-7.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'Real-Time Processing',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'Stay ahead of the curve with our AI agents ability to process and analyze data in real-time, enabling swift responses to changing conditions.',
   },
   {
     imageUrl: '/grid-icons/asset-8.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'Multi-Industry Applications',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'From healthcare to finance, retail to manufacturing, our versatile AI agents are ready to revolutionize processes across diverse sectors.',
   },
   {
     imageUrl: '/grid-icons/asset-9.svg',
-    title: 'Lorem ipsum dolor sit amet.',
+    title: 'Scalable Solutions',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis error dolorem ipsa dolore facere est consequuntur aut, eos doloribus voluptate?',
+      'Grow with confidence using our scalable AI infrastructure, designed to handle increasing data volumes and complexity as your business expands.',
   },
 ];
 
 export default function FeaturesPage() {
   return (
-    <Page title="Features" description="Elit aute do nisi Lorem id ea culpa sint duis eu tempor dolore elit.">
+    <Page title="AI Agent Features" description="Discover the cutting-edge capabilities of our autonomous AI agents, designed to revolutionize industries and enhance user experiences.">
       <Wrapper>
-        <SectionTitle>Check out this quick introduction</SectionTitle>
+        <SectionTitle>Autonomous AI Agents: The Future of Business</SectionTitle>
         <YoutubeVideo url="https://www.youtube.com/watch?v=BggrpKfqh1c" />
+        <VideoNote>Note: Please replace this video URL with a relevant AIAgents.biz introduction or demo video.</VideoNote>
         <CustomAutofitGrid>
           {FEATURES.map((singleFeature, idx) => (
             <BasicCard key={singleFeature.title} {...singleFeature} />
@@ -95,4 +96,10 @@ const CustomAutofitGrid = styled(AutofitGrid)`
   ${media('<=phone')} {
     --autofit-grid-item-size: 100%;
   }
+`;
+
+const VideoNote = styled.p`
+  text-align: center;
+  font-style: italic;
+  opacity: 0.8;
 `;

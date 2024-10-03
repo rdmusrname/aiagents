@@ -5,26 +5,29 @@ import ButtonGroup from 'components/ButtonGroup';
 import Container from 'components/Container';
 import HeroIllustration from 'components/HeroIllustation';
 import OverTitle from 'components/OverTitle';
-import { useNewsletterModalContext } from 'contexts/newsletter-modal.context';
 import { media } from 'utils/media';
 
 export default function Hero() {
-  const { setIsModalOpened } = useNewsletterModalContext();
-
   return (
     <HeroWrapper>
-      <Contents>
-        <CustomOverTitle>the coolest, product you have ever seen</CustomOverTitle>
-        <Heading>Site Under Dev :)</Heading>
-        <Description>Join Our Waitlist/Newsletter</Description>
+      <Contents className="content-area">
+        <CustomOverTitle>Next-Generation Autonomous AI Agents</CustomOverTitle>
+        <Heading>Revolutionize Your Business with Cutting-Edge AI</Heading>
+        <Description>
+          Harness the power of adaptive, intelligent agents that seamlessly integrate into your operations, 
+          driving innovation and efficiency across industries. From collaborative learning to neuro-symbolic 
+          reasoning, our AI solutions are at the forefront of technological advancement.
+        </Description>
         <CustomButtonGroup>
-          <Button onClick={() => setIsModalOpened(true)}>
-            Subscribe to the newsletter <span>&rarr;</span>
-          </Button>
-          <NextLink href="#whitepaper" passHref>
-            <Button transparent>
-              Features <span>&rarr;</span>
-            </Button>
+          <NextLink href="/contact" passHref>
+            <CustomButton>
+              Request a Demo <span>&rarr;</span>
+            </CustomButton>
+          </NextLink>
+          <NextLink href="#features" passHref>
+            <CustomButton transparent>
+              Explore Capabilities <span>&rarr;</span>
+            </CustomButton>
           </NextLink>
         </CustomButtonGroup>
       </Contents>
@@ -49,9 +52,19 @@ const HeroWrapper = styled(Container)`
 const Contents = styled.div`
   flex: 1;
   max-width: 60rem;
+  padding: 6rem;
+  border-radius: 2.5rem;
+  box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.15);
+  }
 
   ${media('<=desktop')} {
     max-width: 100%;
+    padding: 3rem;
   }
 `;
 
@@ -80,8 +93,9 @@ const ImageContainer = styled.div`
 
 const Description = styled.p`
   font-size: 1.8rem;
-  opacity: 0.8;
   line-height: 1.6;
+  margin-bottom: 2rem;
+  color: rgba(var(--text), 0.85);
 
   ${media('<=desktop')} {
     font-size: 1.5rem;
@@ -90,17 +104,26 @@ const Description = styled.p`
 
 const CustomOverTitle = styled(OverTitle)`
   margin-bottom: 2rem;
+  color: rgb(var(--primary));
 `;
 
 const Heading = styled.h1`
-  font-size: 7.2rem;
+  font-size: 5.2rem;
   font-weight: bold;
   line-height: 1.1;
   margin-bottom: 4rem;
   letter-spacing: -0.03em;
+  color: rgba(var(--text), 0.85);
 
   ${media('<=tablet')} {
     font-size: 4.6rem;
     margin-bottom: 2rem;
+  }
+`;
+
+const CustomButton = styled(Button)`
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 `;

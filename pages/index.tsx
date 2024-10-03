@@ -5,13 +5,11 @@ import BasicSection from 'components/BasicSection';
 import Link from 'components/Link';
 import { EnvVars } from 'env';
 import { getAllPosts } from 'utils/postsFetcher';
-import Cta from 'views/HomePage/Cta';
+import Hero from 'views/HomePage/Hero';
+import ScrollableBlogPosts from 'views/HomePage/ScrollableBlogPosts';
 import Features from 'views/HomePage/Features';
 import FeaturesGallery from 'views/HomePage/FeaturesGallery';
-import Hero from 'views/HomePage/Hero';
-import Partners from 'views/HomePage/Partners';
-import ScrollableBlogPosts from 'views/HomePage/ScrollableBlogPosts';
-import Testimonials from 'views/HomePage/Testimonials';
+import { media } from 'utils/media';
 
 export default function Homepage({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
@@ -20,41 +18,59 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         <title>{EnvVars.SITE_NAME}</title>
         <meta
           name="description"
-          content="Tempor nostrud velit fugiat nostrud duis incididunt Lorem deserunt est tempor aute dolor ad elit."
+          content="AIAgents.biz: Revolutionize your business with cutting-edge autonomous AI agents. Our adaptive, user-centric solutions drive innovation and efficiency across industries, from healthcare to finance, manufacturing to retail."
         />
       </Head>
       <HomepageWrapper>
         <WhiteBackgroundContainer>
-          <ScrollableBlogPosts posts={posts} />
-          {/* <Hero />
-          <Partners />
-          <BasicSection imageUrl="/demo-illustration-1.svg" title="Lorem ipsum dolor sit amet consectetur." overTitle="sit amet gogo">
+          <Hero />
+          <BasicSection imageUrl="/demo-illustration-1.svg" title="Empowering Industries with Intelligent Automation" overTitle="Next-Gen AI Solutions">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, quidem error incidunt a doloremque voluptatem porro inventore
-              voluptate quo deleniti animi laboriosam.{' '}
-              <Link href="/help-center">Possimus ullam velit rem itaque consectetur, in distinctio?</Link> Lorem ipsum, dolor sit amet
-              consectetur adipisicing elit. Soluta repellendus quia quos obcaecati nihil. Laudantium non accusantium, voluptate eum nesciunt
-              at suscipit quis est soluta?
-            </p>
-          </BasicSection>
-          <BasicSection imageUrl="/demo-illustration-2.svg" title="Lorem ipsum dolor sit." overTitle="lorem ipsum" reversed>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, quidem error incidunt a doloremque voluptatem porro inventore{' '}
-              <strong>voluptate quo deleniti animi laboriosam</strong>. Possimus ullam velit rem itaque consectetur, in distinctio?
+              At AIAgents.biz, we're redefining what's possible with AI. Our autonomous agents are more than just tools; they're intelligent partners that adapt, learn, and evolve to meet your industry's unique challenges. From healthcare to finance, manufacturing to retail, our AI solutions are driving unprecedented innovation and efficiency.
             </p>
             <ul>
-              <li>Professional point 1</li>
-              <li>Professional remark 2</li>
-              <li>Professional feature 3</li>
+              <li>Adaptive learning algorithms for continuous performance optimization</li>
+              <li>Seamless integration with existing systems for frictionless adoption</li>
+              <li>Real-time data processing and predictive analytics for informed decision-making</li>
+              <li>Natural language processing for intuitive human-AI collaboration</li>
             </ul>
-          </BasicSection> */}
-        </WhiteBackgroundContainer>
-        {/* <DarkerBackgroundContainer>
-          <Cta />
-          <FeaturesGallery />
+            <p>Ready to experience the future of AI? <Link href="/contact">Book a call with our experts today.</Link></p>
+          </BasicSection>
+          <BasicSection imageUrl="/demo-illustration-2.svg" title="Unparalleled User Experience at the Core of AI" overTitle="Human-Centric Innovation" reversed>
+            <p>
+              We believe that AI's true potential lies in enhancing human capabilities, not replacing them. That's why user experience is the cornerstone of our development process. Our autonomous AI agents feature:
+            </p>
+            <ul>
+              <li>Intuitive interfaces that empower users of all technical backgrounds</li>
+              <li>Transparent decision-making processes to build trust and foster understanding</li>
+              <li>Personalized interactions tailored to individual user preferences and needs</li>
+              <li>Proactive assistance that anticipates and addresses user requirements</li>
+            </ul>
+            <p>
+              By prioritizing <strong>user-centric design</strong> and <strong>transparent AI</strong>, we're creating solutions that are not only powerful but also trustworthy and accessible. <Link href="/contact">Discover how our AI agents can transform your user experience and drive business growth.</Link>
+            </p>
+          </BasicSection>
           <Features />
-          <Testimonials />
-        </DarkerBackgroundContainer> */}
+          <FeaturesGallery />
+          <BasicSection imageUrl="/demo-illustration-3.png" title="Cutting-Edge Technology, Unmatched Results" overTitle="Innovation at Scale">
+            <p>
+              At AIAgents.biz, we harness the latest breakthroughs in artificial intelligence to deliver results that exceed expectations:
+            </p>
+            <ul>
+              <li>Advanced deep learning models that uncover hidden patterns and generate actionable insights</li>
+              <li>Reinforcement learning algorithms for optimal decision-making in complex, dynamic environments</li>
+              <li>State-of-the-art computer vision capabilities for sophisticated image and video analysis</li>
+              <li>Federated learning techniques to ensure data privacy and security while leveraging collective intelligence</li>
+            </ul>
+            <p>
+              Our unwavering commitment to innovation ensures that your business stays ahead of the curve, equipped with AI solutions that are always at the forefront of technological advancement.
+            </p>
+            <p>
+              Don't let your competition outpace you. <Link href="/contact">Book a call now</Link> to explore how our cutting-edge AI agents can propel your business into the future.
+            </p>
+          </BasicSection>
+          <ScrollableBlogPosts posts={posts} />
+        </WhiteBackgroundContainer>
       </HomepageWrapper>
     </>
   );
@@ -66,16 +82,9 @@ const HomepageWrapper = styled.div`
   }
 `;
 
-const DarkerBackgroundContainer = styled.div`
-  background: rgb(var(--background));
-
-  & > *:not(:first-child) {
-    margin-top: 15rem;
-  }
-`;
-
 const WhiteBackgroundContainer = styled.div`
-  background: rgb(var(--secondBackground));
+  background: rgba(var(--secondBackground), 0.4);
+  backdrop-filter: blur(10px);
 
   & > :last-child {
     padding-bottom: 15rem;
@@ -83,6 +92,12 @@ const WhiteBackgroundContainer = styled.div`
 
   & > *:not(:first-child) {
     margin-top: 15rem;
+  }
+
+  ${media('<=desktop')} {
+    & > *:not(:first-child) {
+      margin-top: 10rem;
+    }
   }
 `;
 

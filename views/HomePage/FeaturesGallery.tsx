@@ -1,87 +1,73 @@
-import NextImage from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Collapse from 'components/Collapse';
+import { media } from 'utils/media';
 import Container from 'components/Container';
 import OverTitle from 'components/OverTitle';
-import SectionTitle from 'components/SectionTitle';
-import ThreeLayersCircle from 'components/ThreeLayersCircle';
-import { media } from 'utils/media';
 
-const TABS = [
+const FEATURES = [
   {
-    title: 'Find relevant media contacts - multiline title',
+    imageUrl: '/grid-icons/asset-1.svg',
+    title: 'Adaptive Learning',
     description:
-      '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quidem ipsam ratione dicta quis cupiditate consequuntur laborum ducimus iusto velit.</p>',
-    imageUrl: '/demo-illustration-3.png',
-    baseColor: '249,82,120',
-    secondColor: '221,9,57',
+      'Our AI agents continuously learn and adapt to your specific business needs, ensuring optimal performance and efficiency.',
   },
   {
-    title: 'Another amazing feature',
+    imageUrl: '/grid-icons/asset-2.svg',
+    title: 'Seamless Integration',
     description:
-      '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quidem ipsam ratione dicta quis cupiditate consequuntur laborum ducimus iusto velit.</p>',
-    imageUrl: '/demo-illustration-4.png',
-    baseColor: '57,148,224',
-    secondColor: '99,172,232',
+      'Easily integrate our AI solutions into your existing systems and workflows without disrupting your operations.',
   },
   {
-    title: 'And yet... another truly fascinating feature',
+    imageUrl: '/grid-icons/asset-3.svg',
+    title: 'Real-time Analytics',
     description:
-      '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quidem ipsam ratione dicta quis cupiditate consequuntur laborum ducimus iusto velit.</p>',
-    imageUrl: '/demo-illustration-5.png',
-    baseColor: '88,193,132',
-    secondColor: '124,207,158',
+      'Get instant insights and actionable data to make informed decisions and stay ahead of the competition.',
+  },
+  {
+    imageUrl: '/grid-icons/asset-4.svg',
+    title: 'Natural Language Processing',
+    description:
+      'Our AI agents understand and communicate in natural language, making human-AI collaboration intuitive and efficient.',
+  },
+  {
+    imageUrl: '/grid-icons/asset-5.svg',
+    title: 'Predictive Modeling',
+    description:
+      'Leverage advanced algorithms to forecast trends, anticipate challenges, and seize opportunities before they arise.',
+  },
+  {
+    imageUrl: '/grid-icons/asset-6.svg',
+    title: 'Autonomous Decision Making',
+    description:
+      'Empower your AI agents to make intelligent decisions independently, freeing up your team to focus on strategic tasks.',
   },
 ];
 
 export default function FeaturesGallery() {
-  const [currentTab, setCurrentTab] = useState(TABS[0]);
-
-  const imagesMarkup = TABS.map((singleTab, idx) => {
-    const isActive = singleTab.title === currentTab.title;
-    const isFirst = idx === 0;
-
-    return (
-      <ImageContainer key={singleTab.title} isActive={isActive}>
-        <NextImage src={singleTab.imageUrl} alt={singleTab.title} layout="fill" objectFit="contain" priority={isFirst} />
-      </ImageContainer>
-    );
-  });
-
-  const tabsMarkup = TABS.map((singleTab, idx) => {
-    const isActive = singleTab.title === currentTab.title;
-
-    return (
-      <Tab isActive={isActive} key={idx} onClick={() => handleTabClick(idx)}>
-        <TabTitleContainer>
-          <CircleContainer>
-            <ThreeLayersCircle baseColor={isActive ? 'transparent' : singleTab.baseColor} secondColor={singleTab.secondColor} />
-          </CircleContainer>
-          <h4>{singleTab.title}</h4>
-        </TabTitleContainer>
-        <Collapse isOpen={isActive} duration={300}>
-          <TabContent>
-            <div dangerouslySetInnerHTML={{ __html: singleTab.description }}></div>
-          </TabContent>
-        </Collapse>
-      </Tab>
-    );
-  });
-
-  function handleTabClick(idx: number) {
-    setCurrentTab(TABS[idx]);
-  }
+  const [currentFeature, setCurrentFeature] = useState(0);
 
   return (
-    <FeaturesGalleryWrapper>
+    <FeaturesGalleryWrapper className="content-area">
       <Content>
-        <OverTitle>features</OverTitle>
-        <SectionTitle>What are you signing in for?</SectionTitle>
+        <OverTitle>Unleash the Power of AI</OverTitle>
+        <SectionTitle>Cutting-Edge Features</SectionTitle>
       </Content>
       <GalleryWrapper>
-        <TabsContainer>{tabsMarkup}</TabsContainer>
-        {imagesMarkup}
+        <FeatureGrid>
+          {FEATURES.map((feature, i) => (
+            <FeatureCard
+              key={feature.title}
+              selected={i === currentFeature}
+              onClick={() => setCurrentFeature(i)}
+            >
+              <FeatureImageWrapper>
+                <FeatureImage src={feature.imageUrl} alt={feature.title} />
+              </FeatureImageWrapper>
+              <FeatureTitle>{feature.title}</FeatureTitle>
+              <FeatureDescription>{feature.description}</FeatureDescription>
+            </FeatureCard>
+          ))}
+        </FeatureGrid>
       </GalleryWrapper>
     </FeaturesGalleryWrapper>
   );
@@ -89,119 +75,108 @@ export default function FeaturesGallery() {
 
 const FeaturesGalleryWrapper = styled(Container)`
   display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: center;
-`;
-
-const GalleryWrapper = styled.div`
-  display: flex;
   align-items: center;
-  margin-top: 4rem;
+  margin-top: 5rem;
+  padding: 6rem;
+  border-radius: 2.5rem;
+  box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 
-  ${media('<=desktop')} {
-    flex-direction: column;
+  &:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.15);
   }
 `;
 
 const Content = styled.div`
-  & > *:not(:first-child) {
-    margin-top: 1rem;
-  }
   text-align: center;
+  margin-bottom: 4rem;
 `;
 
-const TabsContainer = styled.div`
-  flex: 1;
-  margin-right: 4rem;
-
-  & > *:not(:first-child) {
-    margin-top: 2rem;
-  }
-
-  ${media('<=desktop')} {
-    margin-right: 0;
-    margin-bottom: 4rem;
-    width: 100%;
-  }
-`;
-
-const ImageContainer = styled.div<{ isActive: boolean }>`
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.8rem;
-  flex: ${(p) => (p.isActive ? '2' : '0')};
-  box-shadow: var(--shadow-md);
-
-  &:before {
-    display: block;
-    content: '';
-    width: 100%;
-    padding-top: calc((9 / 16) * 100%);
-  }
-
-  & > div {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  ${media('<=desktop')} {
-    width: ${(p) => (p.isActive ? '100%' : '0')};
-  }
-`;
-
-const Tab = styled.div<{ isActive: boolean }>`
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 1.5rem;
-  background: rgb(var(--cardBackground));
-  box-shadow: var(--shadow-md);
-  opacity: ${(p) => (p.isActive ? 1 : 0.6)};
-  cursor: pointer;
-  border-radius: 0.6rem;
-  transition: opacity 0.2s;
-
-  font-size: 1.6rem;
+const SectionTitle = styled.h2`
+  font-size: 5.2rem;
   font-weight: bold;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin-bottom: 4rem;
+  color: rgba(var(--text), 0.85);
 
+  ${media('<=tablet')} {
+    font-size: 4.6rem;
+    margin-bottom: 2rem;
+  }
+`;
+
+const GalleryWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const FeatureGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  
   ${media('<=desktop')} {
-    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  ${media('<=tablet')} {
+    grid-template-columns: 1fr;
   }
 `;
 
-const TabTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-
-  h4 {
-    flex: 1;
-  }
-`;
-
-const TabContent = styled.div`
+const FeatureCard = styled.div<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
-  font-weight: normal;
-  margin-top: 0.5rem;
-  font-size: 1.5rem;
-  padding-left: calc(5rem + 1.5rem);
+  align-items: center;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(var(--cardBackground), 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
-  ${media('<=tablet')} {
-    padding-left: calc(4rem + 1.25rem);
-  }
+  ${(p) =>
+    p.selected &&
+    `
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  `}
 
-  p {
-    font-weight: normal;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   }
 `;
 
-const CircleContainer = styled.div`
-  flex: 0 calc(5rem + 1.5rem);
+const FeatureImageWrapper = styled.div`
+  display: inline-block;
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  margin-bottom: 2rem;
+`;
 
-  ${media('<=tablet')} {
-    flex: 0 calc(4rem + 1.25rem);
-  }
+const FeatureImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`;
+
+const FeatureTitle = styled.h3`
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: rgba(var(--text), 0.85);
+`;
+
+const FeatureDescription = styled.p`
+  font-size: 1.6rem;
+  color: rgba(var(--text), 0.7);
+  line-height: 1.5;
 `;
