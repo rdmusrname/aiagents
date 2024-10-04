@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from 'components/Button';
 import ButtonGroup from 'components/ButtonGroup';
 import Container from 'components/Container';
-import HeroIllustration from 'components/HeroIllustation';
+// import HeroIllustration from 'components/HeroIllustation';
 import OverTitle from 'components/OverTitle';
 import { media } from 'utils/media';
 
@@ -31,9 +31,6 @@ export default function Hero() {
           </NextLink>
         </CustomButtonGroup>
       </Contents>
-      <ImageContainer>
-        <HeroIllustration />
-      </ImageContainer>
     </HeroWrapper>
   );
 }
@@ -42,7 +39,7 @@ const HeroWrapper = styled(Container)`
   display: flex;
   padding-top: 5rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
 
@@ -55,8 +52,9 @@ const HeroWrapper = styled(Container)`
 
 const Contents = styled.div`
   flex: 1;
-  max-width: 60rem;
-  padding: 4rem; // Increased padding from 3rem to 4rem
+  width: 100%;
+  max-width: 100%;
+  padding: 4rem;
   border-radius: 1.5rem;
   background: rgba(var(--cardBackground), 0.8);
   backdrop-filter: blur(15px);
@@ -71,11 +69,11 @@ const Contents = styled.div`
 
   ${media('<=desktop')} {
     max-width: 100%;
-    padding: 3rem; // Adjusted padding for desktop view
+    padding: 3rem;
   }
 
   ${media('<=tablet')} {
-    padding: 2rem; // Adjusted padding for tablet view
+    padding: 2rem;
   }
 `;
 
@@ -87,32 +85,6 @@ const CustomButtonGroup = styled(ButtonGroup)`
     flex-direction: column;
     align-items: stretch;
     gap: 1rem;
-  }
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  margin-left: 2rem;
-
-  svg {
-    max-width: 40rem;
-  }
-
-  ${media('<=desktop')} {
-    margin-top: 2rem;
-    margin-left: 0;
-    svg {
-      max-width: 80%;
-    }
-  }
-
-  ${media('<=tablet')} {
-    svg {
-      max-width: 100%;
-    }
   }
 `;
 
@@ -135,7 +107,7 @@ const Description = styled.p`
 const CustomOverTitle = styled(OverTitle)`
   margin-bottom: 2rem;
   color: rgb(var(--primary));
-  line-height: 1.5; // Added line-height for better spacing
+  line-height: 1.5;
 
   ${media('<=tablet')} {
     margin-bottom: 1.5rem;
